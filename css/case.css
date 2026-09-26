@@ -1,0 +1,206 @@
+/* ==========================================================
+   Ponto — case page template
+   Text column starts at column 3, next to the glyph.
+   ========================================================== */
+
+.case { padding-bottom: var(--s12); }
+
+/* Head: glyph (draws once) + title ------------------------- */
+.case-head {
+  padding-block: var(--s12) var(--s8);
+  row-gap: var(--s4);
+  align-items: start;
+}
+.case-head .glyph-slot { grid-column: 1 / span 2; }
+.case-head .titles {
+  grid-column: 3 / span 8;
+  display: grid;
+  gap: var(--s3);
+  margin-top: -4px; /* first line meets the top row of the glyph */
+}
+
+/* Shared text column --------------------------------------- */
+.case-col { grid-column: 3 / span 8; min-width: 0; }
+.case-wide { grid-column: 3 / span 10; min-width: 0; }
+
+.case-section {
+  padding-block: var(--s6);
+  row-gap: var(--s4);
+}
+.case-section .case-col { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+.case-section .t-long + .t-long { margin-top: 0; }
+
+/* Role by phase: the glyph written out --------------------- */
+.role { padding-block: var(--s6) var(--s4); }
+.role .case-wide { display: grid; gap: var(--s3); }
+.role-list { margin: 0; border-bottom: var(--rule); }
+.role-row {
+  display: grid;
+  grid-template-columns: 4fr 3fr 5fr;
+  column-gap: var(--gutter);
+  row-gap: var(--s1);
+  padding-block: var(--s2);
+  border-top: var(--rule);
+  align-items: baseline;
+}
+.role-row dt { font-weight: 500; }
+.role-row dd { margin: 0; }
+.role-row .level { color: var(--text-2); font-size: var(--fs-meta); line-height: var(--lh-meta); }
+.role-row .did { margin: 0; color: var(--text-2); }
+
+/* Legend: lives on the first case only --------------------- */
+.legend { padding-block: var(--s4) var(--s6); }
+.legend .case-wide {
+  display: grid;
+  gap: var(--s2);
+  padding-block: var(--s3);
+  border-block: var(--rule);
+}
+.legend-keys {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s4);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+.legend-keys li { display: inline-flex; align-items: center; gap: var(--s1); }
+.legend-keys svg { flex: none; shape-rendering: crispEdges; }
+.legend-keys .k-accent { fill: var(--accent); }
+.legend-keys .k-ink { fill: var(--ink); }
+.legend-keys .k-empty { fill: none; stroke: var(--text-2); stroke-width: 1; }
+
+/* Results --------------------------------------------------- */
+.results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3) var(--gutter);
+  margin: 0;
+  padding-block: var(--s3);
+  border-block: var(--rule);
+}
+.results > div { display: grid; gap: var(--s1); align-content: start; }
+.results dd {
+  margin: 0;
+  order: -1;
+  font-family: var(--font-voice);
+  font-size: var(--fs-case);
+  line-height: var(--lh-case);
+  font-variant-numeric: tabular-nums;
+}
+.results dt { font-size: var(--fs-meta); line-height: var(--lh-meta); color: var(--text-2); }
+
+/* Figures: charts and screens inside the text flow --------- */
+.case-figure {
+  margin: 0;
+  padding-block: var(--s2);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s2);
+}
+.case-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* images keep their own screen edges; the canvas around them is transparent */
+.case-figure picture { display: block; }
+.case-figure figcaption {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+  max-width: var(--measure-ui);
+}
+/* wide figures (maps, flows) use the full 12 columns */
+.case-figure--wide { grid-column: 1 / -1; padding-block: var(--s2); }
+/* phone screens sit side by side at their own size, never shrunk into thumbnails */
+.case-figure--screens .screens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  align-items: flex-start;
+}
+.case-figure--screens img { width: auto; max-width: 100%; }
+.case-figure .screen { margin: 0; display: grid; gap: var(--s1); align-content: start; width: var(--w, auto); max-width: 100%; }
+.case-figure .screen img { width: 100%; }
+.case-figure .screen figcaption { font-size: var(--fs-meta); line-height: var(--lh-meta); color: var(--text-2); }
+.case-figure .screen figcaption strong { font-weight: 500; color: var(--ink); }
+
+/* Bar charts: drawn in HTML from the data, ink only ---------
+   The accent never goes into charts (spec: glyph cells, links, focus only).
+   Emphasis = ink; the rest = secondary text colour. 0 radius, 0–100 scale. */
+.bars {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-variant-numeric: tabular-nums;
+}
+.bars caption {
+  text-align: left;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 500;
+  padding-bottom: var(--s2);
+}
+.bars th, .bars td { padding: var(--s1) 0; vertical-align: middle; text-align: left; font-weight: 400; }
+.bars th { width: 30%; padding-right: var(--s2); color: var(--ink); }
+.bars td.value { width: 4.5em; padding-left: var(--s2); text-align: right; color: var(--ink); }
+.bars .track { display: block; height: var(--s2); border-bottom: var(--rule); }
+.bars .fill { display: block; height: 100%; width: var(--v); background: var(--text-2); }
+.bars tr.em .fill { background: var(--ink); }
+.bars tr.em th, .bars tr.em td.value { font-weight: 500; }
+.bars .scale td, .bars .scale th { padding-top: 0; color: var(--text-2); }
+.bars .scale .ticks { display: flex; justify-content: space-between; }
+@media (max-width: 640px) {
+  .bars th { width: 38%; }
+}
+
+/* Before/after terms table ---------------------------------- */
+.case-section .t-sub { margin-top: var(--s2); }
+.terms { width: 100%; border-collapse: collapse; font-size: var(--fs-body); line-height: var(--lh-body); }
+.terms caption { text-align: left; font-size: var(--fs-meta); line-height: var(--lh-meta); color: var(--text-2); padding-bottom: var(--s1); }
+.terms th { text-align: left; font-weight: 500; font-size: var(--fs-meta); color: var(--text-2); padding: var(--s1) var(--s2) var(--s1) 0; border-bottom: var(--rule); }
+.terms td { vertical-align: top; padding: var(--s2) var(--s2) var(--s2) 0; border-bottom: var(--rule); width: 50%; }
+.terms .gloss { display: block; font-size: var(--fs-meta); line-height: var(--lh-meta); color: var(--text-2); }
+
+/* Before/after and annotated figures ------------------------ */
+.compare { display: grid; gap: var(--s4); }
+.compare-item { display: grid; gap: var(--s1); justify-items: start; }
+.compare-label { font-size: var(--fs-meta); line-height: var(--lh-meta); font-weight: 500; color: var(--ink); }
+.compare img { width: 100%; }
+.annotated img { max-width: 850px; }
+.terms--4 td { width: auto; }
+.terms--4 { font-size: var(--fs-meta); line-height: var(--lh-meta); }
+.table-scroll { overflow-x: auto; }
+
+/* Quotes from users and support ----------------------------- */
+.quotes { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s3); }
+.quotes li { display: grid; gap: var(--s1); padding-left: var(--s2); border-left: var(--rule); }
+.quotes blockquote {
+  margin: 0;
+  font-family: var(--font-voice);
+  font-size: var(--fs-sub);
+  line-height: var(--lh-sub);
+  max-width: var(--measure-voice);
+}
+.quotes--long blockquote { font-size: var(--fs-long); line-height: var(--lh-long); }
+
+/* More work ------------------------------------------------- */
+.more { padding-top: var(--s8); display: grid; gap: var(--s4); }
+
+/* Tablet ---------------------------------------------------- */
+@media (max-width: 960px) {
+  .case-head .glyph-slot { grid-column: 1 / -1; }
+  .case-head .titles { grid-column: 1 / span 11; margin-top: 0; }
+  .case-col, .case-wide { grid-column: 1 / span 11; }
+}
+
+/* Phone ----------------------------------------------------- */
+@media (max-width: 640px) {
+  .case-head { padding-block: var(--s8) var(--s6); }
+  .case-head .titles, .case-col, .case-wide { grid-column: 1 / -1; }
+  .role-row { grid-template-columns: 1fr; }
+  .results { grid-template-columns: 1fr; }
+}

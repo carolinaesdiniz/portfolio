@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Organizing Payments, Carol Diniz</title>
+<meta name="description" content="An engineering rebuild of Serasa’s agreements list, used to fix how people find what they owe. Launched on web and app in January 2023.">
+<!-- link preview -->
+<link rel="canonical" href="https://carolinaesdiniz.com/work/organizing-payments.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Carol Diniz">
+<meta property="og:title" content="Organizing Payments, a case study by Carol Diniz">
+<meta property="og:description" content="A redesign of Serasa’s agreements list on web and app, so people could find what they owe and act on it.">
+<meta property="og:url" content="https://carolinaesdiniz.com/work/organizing-payments.html">
+<meta property="og:image" content="https://carolinaesdiniz.com/img/og/organizing-payments.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Organizing Payments glyph next to the case title, serasa experian, 2023.">
+<meta name="twitter:card" content="summary_large_image">
+<!-- /link preview -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/glyph.css">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/case.css">
+<link rel="stylesheet" href="../css/annot.css">
+</head>
+<body>
+
+<header class="frame grid site-header">
+  <a class="home-link" href="../index.html" aria-label="Carol Diniz, home">
+    <span data-glyph="carol" data-size="xs" aria-hidden="true"></span>
+    <span>Carol Diniz</span>
+  </a>
+  <nav class="site-nav" aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main class="case">
+
+  <!-- Head: the glyph draws itself once, then stays still -->
+  <header class="frame grid case-head">
+    <div class="glyph-slot">
+      <span data-glyph="organizing-payments" data-size="l" data-draw></span>
+    </div>
+    <div class="titles">
+      <h1 class="t-case">Organizing Payments</h1>
+      <p class="t-long">Engineering needed to rebuild Serasa’s agreements list because the legacy code kept crashing. The rebuild became the chance to fix something business had never prioritized: people could not find what they came to pay.</p>
+      <p class="t-meta">serasa experian, launched january 2023<br>retention through usability</p>
+    </div>
+  </header>
+
+  <!-- Role by phase: the same information as the glyph, in words -->
+  <section class="frame grid role" aria-labelledby="role-title">
+    <div class="case-wide">
+      <h2 class="t-sub" id="role-title">My role</h2>
+      <dl class="role-list">
+        <div class="role-row">
+          <dt>Research and discovery</dt>
+          <dd class="level t-num">took a small part, 1 of 4</dd>
+          <dd class="did">Data analysis and a quick survey, building on usability research that already existed.</dd>
+        </div>
+        <div class="role-row">
+          <dt>Definition and strategy</dt>
+          <dd class="level t-num">led, with input from others, 3 of 4</dd>
+          <dd class="did">The three pillars of the redesign, the new order of the list and what went into the details page.</dd>
+        </div>
+        <div class="role-row">
+          <dt>Design and systems</dt>
+          <dd class="level t-num">shared the work, 2 of 4</dd>
+          <dd class="did">Card redesign and one vocabulary for web and app.</dd>
+        </div>
+        <div class="role-row">
+          <dt>Delivery and measurement</dt>
+          <dd class="level t-num">led with full autonomy, 4 of 4</dd>
+          <dd class="did">Usability tests with <span class="t-num">138</span> participants, final adjustments, stakeholder validation and the launch on web and app.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="frame grid case-section" aria-labelledby="problem-title">
+    <div class="case-col">
+      <h2 class="t-section" id="problem-title">Problem</h2>
+      <p class="t-long">The agreements list is where people find the bank slips for the debts they have renegotiated. When it crashed, people could not pay, and Serasa lost revenue. That made the rebuild an engineering priority. Earlier research had also pointed to usability problems, but business had never prioritized them. In this project, better usability was a bonus, not the brief.</p>
+      <p class="t-long">We asked people why they came to the page: <span class="t-num">46%</span> to pay, and <span class="t-num">36%</span> to check whether a debt had been marked as paid.</p>
+      <figure class="case-figure">
+        <table class="bars">
+          <caption>Why are you accessing this page?</caption>
+          <tbody>
+            <tr class="em"><th scope="row">Making a payment</th><td><span class="track"><span class="fill" style="--v:46%"></span></span></td><td class="value">46%</td></tr>
+            <tr class="em"><th scope="row">Checking if the debt was marked as paid</th><td><span class="track"><span class="fill" style="--v:36%"></span></span></td><td class="value">36%</td></tr>
+            <tr><th scope="row">Finding information about the agreement</th><td><span class="track"><span class="fill" style="--v:10%"></span></span></td><td class="value">10%</td></tr>
+            <tr><th scope="row">Getting a payment receipt</th><td><span class="track"><span class="fill" style="--v:4%"></span></span></td><td class="value">4%</td></tr>
+            <tr><th scope="row">Other</th><td><span class="track"><span class="fill" style="--v:4%"></span></span></td><td class="value">4%</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Together, paying and checking a payment made up <span class="t-num">82%</span> of visits.</figcaption>
+      </figure>
+      <p class="t-long">The list made both jobs harder than they needed to be. There was no clear logic to the order, the cards were inconsistent and carried too much information, and web and app used different words for the same things.</p>
+      <figure class="case-figure">
+        <picture><source srcset="../img/organizing-payments/card-anatomy-dark.webp" media="(prefers-color-scheme: dark)"><img src="../img/organizing-payments/card-anatomy.webp" width="642" height="1066" loading="lazy"
+             alt="Annotated anatomy of two agreement cards. Serasa’s card shows logo, whether the debt is on a CPF or CNPJ, agreement status, installment and a link to agreement details. A competitor’s card shows payment status, the original creditor, agreement details, the current payment, a button to copy the payment code and a link to see all payments."></picture>
+        <figcaption>Discovery. The anatomy of Serasa’s agreement card next to a competitor’s, which puts payment status, the original creditor and the current payment up front.</figcaption>
+      </figure>
+    </div>
+    <figure class="case-figure case-figure--wide">
+      <picture><source srcset="../img/organizing-payments/agreements-map-web-app-dark.webp" media="(prefers-color-scheme: dark)"><img src="../img/organizing-payments/agreements-map-web-app.webp" width="1920" height="1074" loading="lazy"
+           alt="Map of every path to the agreements list on web and in the app, across Home, Finance, My CPF, Solutions and Pay. Notes mark the gaps: no Finance section in the app, no way to reach agreements through My CPF in the app, a digital wallet that shows a different listing built on different code, and an option that reads ‘Soon’ on desktop but does not appear on mobile web."></picture>
+      <figcaption>Discovery. Every path to the agreements list on web and in the app, and the gaps between them: different entry points, different names, and places where the list could not be reached at all. <a href="../img/organizing-payments/agreements-map-web-app.webp">Open the full-size map</a></figcaption>
+    </figure>
+    <div class="case-col">
+      <p class="t-long">When we asked whether they could find what they were looking for, <span class="t-num">31.7%</span> said no. Most of them struggled to find options like renegotiating, printing the bank slip or checking payment confirmation. The information architecture and the labels needed revision.</p>
+      <figure class="case-figure">
+        <table class="bars">
+          <caption>Could you find what you were looking for?</caption>
+          <tbody>
+            <tr><th scope="row">Yes</th><td><span class="track"><span class="fill" style="--v:68.1%"></span></span></td><td class="value">68.1%</td></tr>
+            <tr class="em"><th scope="row">No</th><td><span class="track"><span class="fill" style="--v:31.7%"></span></span></td><td class="value">31.7%</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Those who could not complete their goal mostly struggled to find options like renegotiating, printing a bill or checking payment confirmation.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="frame grid case-section" aria-labelledby="constraints-title">
+    <div class="case-col">
+      <h2 class="t-section" id="constraints-title">Constraints</h2>
+      <p class="t-long">The goal was set by engineering: fewer crashes. Every usability change had to fit inside that rebuild without putting it at risk.</p>
+      <p class="t-long">Web and app had grown apart, each with its own words and its own version of the list. Serasa’s design system was only starting to exist, so some components were ready to use and many had to be improvised.</p>
+      <p class="t-long">The upside of the rebuild was real, too. Because the list was moving to new, more robust code, the design was not limited by what the old code could do.</p>
+    </div>
+  </section>
+
+  <section class="frame grid case-section" aria-labelledby="decisions-title">
+    <div class="case-col">
+      <h2 class="t-section" id="decisions-title">Decisions</h2>
+      <p class="t-long">The redesign rested on three pillars: status clarity, information hierarchy and scalability. If people can do what they came to do, they stay.</p>
+    </div>
+    <figure class="case-figure case-wide compare">
+      <div class="compare-item">
+        <p class="compare-label">Before</p>
+        <img src="../img/organizing-payments/list-before.webp" width="754" height="1328" loading="lazy" style="max-width:377px" alt="The old agreements list in Portuguese: large cards, each repeating the Serasa logo, whether the debt is on your CPF, the agreement status with a progress bar, and the installment, amount and due date.">
+      </div>
+      <div class="compare-item">
+        <p class="compare-label">After</p>
+        <picture><source srcset="../img/organizing-payments/list-after-dark.webp" media="(prefers-color-scheme: dark)"><img src="../img/organizing-payments/list-after.webp" width="1898" height="1338" loading="lazy" alt="The new agreements list in Portuguese, split into four sections: in progress with Serasa, in progress with the partner company, paid, and cancelled. Each agreement is a short row with the payment type, amount and due date, and a status tag when a payment is overdue or pending."></picture>
+      </div>
+      <figcaption>The agreements list before and after. Screens use sample data.</figcaption>
+    </figure>
+
+    <div class="case-col">
+      <h3 class="t-sub">Four sections, ordered by what needs action</h3>
+      <p class="t-long">The list became four sections: agreements in progress with Serasa, in progress with the partner company, paid, and cancelled. Inside the first one, overdue payments come first, then pending ones, then payments that are not available yet, each sorted by due date. We explored other orderings, and this was the most logical for both sides: people see at a glance what needs their action, and the business reduces defaults from people who could not find what they owed.</p>
+      <p class="t-long">Sections with nothing in them do not appear. The partner section only shows for people who have, or had, that kind of agreement.</p>
+    </div>
+    <figure class="annot case-wide">
+      <div class="annot-stage" style="--w:364px">
+        <div class="annot-rail">
+          <button type="button" class="annot-mark" data-n="1" style="--t:11.2%;--h:14.0%" aria-pressed="false" aria-label="Note 1"><span class="annot-num">1</span></button>
+          <button type="button" class="annot-mark" data-n="2" style="--t:26.5%;--h:23.8%" aria-pressed="false" aria-label="Note 2"><span class="annot-num">2</span></button>
+          <button type="button" class="annot-mark" data-n="3" style="--t:50.6%;--h:23.8%" aria-pressed="false" aria-label="Note 3"><span class="annot-num">3</span></button>
+          <button type="button" class="annot-mark" data-n="4" style="--t:74.7%;--h:24.1%" aria-pressed="false" aria-label="Note 4"><span class="annot-num">4</span></button>
+        </div>
+        <div class="annot-screen">
+          <img src="../img/organizing-payments/screen-section-serasa.webp" width="728" height="1792" loading="lazy" alt="The section “Agreements in progress with Serasa”, in Portuguese: two agreements with an overdue payment, two with a pending payment and two whose next payment is not available yet.">
+          <span class="annot-region" data-n="1" style="--t:11.2%;--h:14.0%" aria-hidden="true"></span>
+          <span class="annot-region" data-n="2" style="--t:26.5%;--h:23.8%" aria-hidden="true"></span>
+          <span class="annot-region" data-n="3" style="--t:50.6%;--h:23.8%" aria-hidden="true"></span>
+          <span class="annot-region" data-n="4" style="--t:74.7%;--h:24.1%" aria-hidden="true"></span>
+        </div>
+      </div>
+      <ol class="annot-notes">
+        <li data-n="1"><span class="annot-num" aria-hidden="true">1</span><span><strong>In progress with Serasa.</strong> Installments paid through Serasa. When there is nothing in progress, the whole section is hidden.</span></li>
+        <li data-n="2"><span class="annot-num" aria-hidden="true">2</span><span><strong>Overdue first.</strong> Agreements with an overdue payment open the list, so what needs action is the first thing people see.</span></li>
+        <li data-n="3"><span class="annot-num" aria-hidden="true">3</span><span><strong>Then pending.</strong> Agreements with a payment coming up, sorted by due date.</span></li>
+        <li data-n="4"><span class="annot-num" aria-hidden="true">4</span><span><strong>Not available yet, last.</strong> Payments that cannot be made yet, with the date they open.</span></li>
+      </ol>
+      <figcaption>The first section of the new list. Screen uses sample data.</figcaption>
+    </figure>
+    <figure class="annot case-wide">
+      <div class="annot-stage" style="--w:364px">
+        <div class="annot-rail">
+          <button type="button" class="annot-mark" data-n="1" style="--t:7.0%;--h:33.8%" aria-pressed="false" aria-label="Note 1"><span class="annot-num">1</span></button>
+          <button type="button" class="annot-mark" data-n="2" style="--t:44.3%;--h:24.5%" aria-pressed="false" aria-label="Note 2"><span class="annot-num">2</span></button>
+          <button type="button" class="annot-mark" data-n="3" style="--t:69.5%;--h:24.5%" aria-pressed="false" aria-label="Note 3"><span class="annot-num">3</span></button>
+        </div>
+        <div class="annot-screen">
+          <img src="../img/organizing-payments/screen-section-partner.webp" width="728" height="858" loading="lazy" alt="The section “Agreements in progress with the partner company”, in Portuguese, with two agreements: one with the first payment confirmed and one with five payments confirmed.">
+          <span class="annot-region" data-n="1" style="--t:7.0%;--h:33.8%" aria-hidden="true"></span>
+          <span class="annot-region" data-n="2" style="--t:44.3%;--h:24.5%" aria-hidden="true"></span>
+          <span class="annot-region" data-n="3" style="--t:69.5%;--h:24.5%" aria-hidden="true"></span>
+        </div>
+      </div>
+      <ol class="annot-notes">
+        <li data-n="1"><span class="annot-num" aria-hidden="true">1</span><span><strong>In progress with the partner company.</strong> The next installments are issued or confirmed by the partner. The section only shows for people who have, or had, this kind of agreement.</span></li>
+        <li data-n="2"><span class="annot-num" aria-hidden="true">2</span><span><strong>First installment paid through Serasa,</strong> waiting for the partner company to update the agreement.</span></li>
+        <li data-n="3"><span class="annot-num" aria-hidden="true">3</span><span><strong>“Finished”, but not closed.</strong> Every installment was paid through Serasa, and the partner has not yet confirmed the last one.</span></li>
+      </ol>
+      <figcaption>The second section, for agreements the partner company handles. Screen uses sample data.</figcaption>
+    </figure>
+    <figure class="case-figure case-figure--screens case-wide">
+      <div class="screens">
+          <figure class="screen" style="--w:364px">
+            <img src="../img/organizing-payments/screen-section-paid.webp" width="728" height="440" loading="lazy" alt="The section “Paid agreements”, in Portuguese, with one agreement: You paid the agreement.">
+            <figcaption><strong>Paid.</strong> Agreements with nothing left to pay.</figcaption>
+          </figure>
+          <figure class="screen" style="--w:364px">
+            <img src="../img/organizing-payments/screen-section-cancelled.webp" width="728" height="790" loading="lazy" alt="The section “Cancelled agreements”, in Portuguese, with two agreements: Agreement cancelled, and You cancelled the agreement.">
+            <figcaption><strong>Cancelled.</strong> By the person, or broken by missed payments or by the partner company.</figcaption>
+          </figure>
+      </div>
+      <figcaption>The last two sections. Screens use sample data.</figcaption>
+    </figure>
+
+    <div class="case-col">
+      <h3 class="t-sub">A short card, with the rest one step away</h3>
+      <p class="t-long">The list became a quick view of each agreement, and everything else moved to the agreement’s details page. People who wanted more could open it; everyone else was not slowed down. Some stakeholders resisted taking information out of the list. After the first rollout showed no negative impact, the resistance faded.</p>
+
+      <h3 class="t-sub">We removed the payment progress bar</h3>
+      <p class="t-long">The old details page showed a bar with how much had been paid and how much was left. It looked helpful, but it raised more questions and more bug reports than it answered, so it went away. The agreement value and the current installment stay on the page as plain values.</p>
+    </div>
+    <figure class="case-figure case-figure--screens case-wide">
+      <div class="screens">
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/details-before.webp" width="1080" height="2037" loading="lazy" alt="The old agreement details page in Portuguese, with a Pix payment available and, under the agreement summary, a progress bar showing 2,500 paid and 2,500 left.">
+            <figcaption><strong>Before.</strong> The progress bar under the agreement summary.</figcaption>
+          </figure>
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/details-after.webp" width="1080" height="2037" loading="lazy" alt="The new agreement details page in Portuguese, with the same Pix payment and an agreement summary listing the agreement value, current installment and agreement date, without the progress bar.">
+            <figcaption><strong>After.</strong> The same summary, without the bar.</figcaption>
+          </figure>
+      </div>
+    </figure>
+
+    <div class="case-col">
+      <h3 class="t-sub">One vocabulary for web and app</h3>
+      <p class="t-long">Web and app used different labels for the same actions. We picked one term for each, and dropped the ones built on “see”, which assume the person can.</p>
+      <figure class="case-figure">
+        <table class="terms">
+          <caption>Labels before and after, in Portuguese</caption>
+          <thead><tr><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+          <tbody>
+            <tr><td lang="pt-BR">ver detalhes, mais detalhes, ver acordo<span class="gloss">see details, more details, see agreement</span></td><td lang="pt-BR">detalhes<span class="gloss">details</span></td></tr>
+            <tr><td lang="pt-BR">ofertas, propostas<span class="gloss">offers, proposals</span></td><td lang="pt-BR">propostas<span class="gloss">proposals</span></td></tr>
+          </tbody>
+        </table>
+      </figure>
+      <p class="t-long">Status names got the same treatment. Two statuses from the service, Canceled and Broken, reached people as the same message, though they mean different things: one was the person’s choice, the other was not. Each got its own wording, and the broken one tells people who to contact.</p>
+      <figure class="case-figure">
+        <div class="table-scroll"><table class="terms terms--4">
+          <caption>Status from the service, and how it reads in the list and in the details</caption>
+          <thead><tr><th scope="col">From the service</th><th scope="col">Meaning</th><th scope="col">In the list</th><th scope="col">In the details</th></tr></thead>
+          <tbody>
+            <tr><td>Canceled</td><td>The person cancelled the agreement</td><td lang="pt-BR">Você cancelou o acordo<span class="gloss">You cancelled the agreement</span></td><td lang="pt-BR">Você cancelou este acordo<span class="gloss">You cancelled this agreement</span></td></tr>
+            <tr><td>Broken</td><td>Broken by missed payments or by the partner company</td><td lang="pt-BR">Acordo cancelado<span class="gloss">Agreement cancelled</span></td><td lang="pt-BR">Seu acordo foi cancelado. Para mais informações, entre em contato com [empresa parceira]<span class="gloss">Your agreement was cancelled. For more information, contact [partner company]</span></td></tr>
+          </tbody>
+        </table></div>
+      </figure>
+
+      <h3 class="t-sub">One tested version, refined in copy</h3>
+      <p class="t-long">We tested a single version with <span class="t-num">138</span> participants. The adjustments after the test were small, and most of them were changes to the copy.</p>
+    </div>
+  </section>
+
+  <section class="frame grid case-section" aria-labelledby="states-title">
+    <div class="case-col">
+      <h2 class="t-section" id="states-title">States and edge cases</h2>
+      <p class="t-long">With less on the card, the details page had to explain each situation on its own: who is handling the agreement, why it was cancelled, and when it is done.</p>
+    </div>
+    <figure class="case-figure case-figure--screens case-wide">
+      <div class="screens">
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/details-partner.webp" width="1080" height="2043" loading="lazy" alt="Agreement details in Portuguese with a warning that the agreement is in progress with the partner company, a boleto available with a button to copy the barcode, and options to download the boleto or send it by WhatsApp.">
+            <figcaption><strong>In progress with the partner.</strong> Translation: This agreement is in progress with the partner company. To receive the next installments, contact Banco Santander S.A.</figcaption>
+          </figure>
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/details-cancelled-partner.webp" width="1080" height="2043" loading="lazy" alt="Agreement details in Portuguese with an alert that the agreement was cancelled and a summary marked Agreement cancelled.">
+            <figcaption><strong>Broken.</strong> Translation: Your agreement was cancelled. For more information, contact Banco Santander S.A.</figcaption>
+          </figure>
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/details-cancelled-you.webp" width="1080" height="2043" loading="lazy" alt="Agreement details in Portuguese with a notice that the person cancelled this agreement and a summary marked Agreement cancelled.">
+            <figcaption><strong>Cancelled by the person.</strong> Translation: You cancelled this agreement.</figcaption>
+          </figure>
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/details-paid.webp" width="1080" height="2043" loading="lazy" alt="Agreement details in Portuguese with a summary marked Agreement paid, the agreement value, current installment and date, and information about the original debt.">
+            <figcaption><strong>Paid.</strong> Translation: Agreement paid.</figcaption>
+          </figure>
+      </div>
+      <figcaption>The agreement details page in four situations.</figcaption>
+    </figure>
+    <div class="case-col">
+      <p class="t-long">The empty list also changes with context. If the person has proposals waiting, it points to them; if not, it points to other Serasa services.</p>
+    </div>
+    <figure class="case-figure case-figure--screens case-wide">
+      <div class="screens">
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/empty-with-proposals.webp" width="720" height="1408" loading="lazy" alt="Empty agreements list in Portuguese: Nothing here! You have no agreements right now. Check your proposals to close agreements and clear your name. Buttons: Go to proposals, Back to home.">
+            <figcaption><strong>No agreements, proposals available.</strong> Translation: Nothing here! You have no agreements right now. Check your proposals to close agreements and clear your name.</figcaption>
+          </figure>
+          <figure class="screen" style="--w:360px">
+            <img src="../img/organizing-payments/empty-no-proposals.webp" width="720" height="1408" loading="lazy" alt="Empty agreements list in Portuguese: Nothing here! You have no agreements right now. Check other Serasa products. Button: Go to services.">
+            <figcaption><strong>No agreements, no proposals.</strong> Translation: Nothing here! You have no agreements right now. Check other Serasa products.</figcaption>
+          </figure>
+      </div>
+    </figure>
+  </section>
+
+  <section class="frame grid case-section" aria-labelledby="outcome-title">
+    <div class="case-col">
+      <h2 class="t-section" id="outcome-title">Outcome</h2>
+      <p class="t-long">The new list launched on web and in the app at the same time, in January 2023. In the usability tests, most people could find their overdue payments and explain the details of their agreement. The two reductions below are projections from product data, not measured results, and I no longer have the post-launch numbers.</p>
+      <dl class="results">
+        <div><dt>found overdue payments and explained their agreement, in testing</dt><dd>78%</dd></div>
+        <div><dt>crashes, expected</dt><dd>−50%</dd></div>
+        <div><dt>agreement breakage, expected</dt><dd>−5%</dd></div>
+      </dl>
+      <p class="t-long">If I were measuring it again, I would track the crash rate, the share of agreements paid on time, and how many people reach the page and leave without paying or opening a bank slip.</p>
+    </div>
+  </section>
+
+  <section class="frame more" aria-labelledby="more-title">
+    <h2 class="t-section" id="more-title">More work</h2>
+    <ul class="work-list">
+      <li class="grid work-item">
+        <div class="glyph-slot"><span data-glyph="unrecognized-debts" data-size="s"></span></div>
+        <div class="summary">
+          <h3 class="t-section title"><a href="unrecognized-debts.html">Unrecognized Debts</a></h3>
+          <p class="t-body">Half the people offered a settlement did not recognize the debt. Brand names and a plain explanation of who held it raised understanding by <span class="t-num">23%</span> in an A/B test.</p>
+        </div>
+        <p class="t-meta meta">serasa experian, 2023<br>retention through trust</p>
+      </li>
+      <li class="grid work-item">
+        <div class="glyph-slot"><span data-glyph="whatsapp-consent-journey" data-size="s"></span></div>
+        <div class="summary">
+          <h3 class="t-section title"><a href="whatsapp-consent-journey.html">Consent &amp; Invitation Journey via WhatsApp</a></h3>
+          <p class="t-body">An informal WhatsApp channel with no opt-in became a consented journey designed around LGPD, written in three languages and made to be replicated.</p>
+        </div>
+        <p class="t-meta meta">sensorama design, 2025–2026<br>retention through clarity<br>password protected</p>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="frame">
+  <div class="grid site-footer">
+    <p class="t-meta">carol diniz</p>
+    <div class="contact">
+      <p class="t-meta">contact</p>
+      <ul>
+        <li><a href="mailto:carolinaesdiniz@gmail.com">carolinaesdiniz@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/carolinaesdiniz/" rel="me">LinkedIn</a></li>
+      </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../index.html#work">Work</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/glyph.js"></script>
+<script src="../js/annot.js"></script>
+</body>
+</html>

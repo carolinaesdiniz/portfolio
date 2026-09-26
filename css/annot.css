@@ -1,0 +1,142 @@
+/* ==========================================================
+   Ponto — annotated screens
+   The screen stays clean. Numbered marks sit in a rail beside it,
+   and the notes are HTML text next to the screen (or below, on phones).
+   Marks: square, 2px radius, like glyph cells at rest. No shadows.
+   ========================================================== */
+
+.annot {
+  margin: 0;
+  padding-block: var(--s2);
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  gap: var(--s3) var(--s4);
+  align-items: start;
+}
+.annot > figcaption {
+  grid-column: 1 / -1;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+  max-width: var(--measure-ui);
+}
+
+/* Stage: rail of marks + the screen */
+.annot-stage {
+  display: grid;
+  grid-template-columns: 40px minmax(0, var(--w, 364px));
+  column-gap: var(--s1);
+}
+.annot-rail { position: relative; }
+.annot-screen { position: relative; }
+.annot-screen img { display: block; width: 100%; height: auto; }
+
+/* A mark: a vertical bar the height of the region, with its number */
+.annot-mark {
+  position: absolute;
+  right: 0;
+  top: var(--t);
+  height: var(--h);
+  width: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s1);
+  cursor: pointer;
+}
+.annot-mark::after {                /* the bar */
+  content: "";
+  flex: none;
+  align-self: stretch;
+  width: 2px;
+  background: var(--hairline);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.annot-num {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--fs-meta);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.annot-mark:hover .annot-num { border-color: var(--ink); }
+.annot-mark:focus-visible { outline-offset: 0; }
+
+/* The region on the screen that the active note talks about */
+.annot-region {
+  position: absolute;
+  left: 0; right: 0;
+  top: var(--t);
+  height: var(--h);
+  /* screens are always light, so the outline uses the light-theme ink in both themes */
+  outline: 2px solid #1A2422;
+  outline-offset: -2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+/* Active state, shared by both modes */
+.annot [data-n].is-active .annot-num,
+.annot-notes li.is-active .annot-num { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.annot-mark.is-active::after { background: var(--ink); }
+.annot-region.is-active { opacity: 1; }
+
+/* Notes */
+.annot-notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s3);
+  max-width: 40ch;
+}
+.annot-notes li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  column-gap: var(--s2);
+  align-items: start;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  cursor: default;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.annot-notes li .annot-num { margin-top: 3px; }
+.annot-notes strong { font-weight: 500; }
+
+/* Large screens: every note is visible; pointing at one quiets the others */
+.annot.has-active .annot-notes li:not(.is-active) { color: var(--text-2); }
+
+/* Small screens: one note at a time, in a strip that stays at the bottom
+   of the window while the screen is in view. Tapping a number changes it. */
+@media (max-width: 640px) {
+  .annot { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .annot > figcaption { margin-top: var(--s2); }
+  .annot-notes {
+    max-width: none;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    padding-block: var(--s2);
+    background: var(--paper);
+    border-top: var(--rule);
+  }
+  .annot-notes li { display: none; }
+  .annot-notes li.is-active { display: grid; }
+  .annot.has-active .annot-notes li:not(.is-active) { color: inherit; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annot-mark::after, .annot-num, .annot-region, .annot-notes li { transition: none; }
+}

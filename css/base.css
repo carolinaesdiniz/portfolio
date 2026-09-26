@@ -1,0 +1,98 @@
+/* ==========================================================
+   Ponto — base styles
+   ========================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Page frame: 12 columns, 24px gutter, 1120px max, left aligned */
+.frame {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;          /* the frame sits in the window; content inside is left aligned */
+  padding-inline: var(--gutter);
+}
+@media (max-width: 640px) {
+  .frame { padding-inline: var(--s2); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* Voice — serif */
+.t-hero, .t-case, .t-section, .t-long {
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  max-width: var(--measure-voice);
+  text-wrap: balance;
+}
+.t-hero    { font-size: var(--fs-hero);    line-height: var(--lh-hero); }
+.t-case    { font-size: var(--fs-case);    line-height: var(--lh-case); }
+.t-section { font-size: var(--fs-section); line-height: var(--lh-section); }
+.t-long    { font-size: var(--fs-long);    line-height: var(--lh-long); text-wrap: pretty; }
+
+/* Interface — sans */
+.t-sub  { font-size: var(--fs-sub);  line-height: var(--lh-sub);  font-weight: 500; max-width: var(--measure-ui); }
+.t-body { font-size: var(--fs-body); line-height: var(--lh-body); max-width: var(--measure-ui); }
+.t-meta { font-size: var(--fs-meta); line-height: var(--lh-meta); color: var(--text-2); }
+/* metadata: lowercase, comma separated, never spaced caps, never middle dots */
+
+.t-num { font-variant-numeric: tabular-nums; }
+
+h1, h2, h3, h4, p, ul, ol, dl, figure { margin: 0; }
+
+/* Links: accent text colour, no arrow glyphs */
+a {
+  color: var(--accent-text);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* Keyboard focus: accent ring, 2px offset, everywhere */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: var(--rule);
+  border-radius: var(--radius);
+  padding: var(--s1) var(--s2);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+button:hover { border-color: var(--ink); }
+
+/* Separation is hairline + space. No shadows anywhere. */
+.rule { border: 0; border-top: var(--rule); margin: 0; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

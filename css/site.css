@@ -1,0 +1,128 @@
+/* ==========================================================
+   Ponto — site layout: header, home hero, work list, footer
+   ========================================================== */
+
+/* Header ---------------------------------------------------- */
+.site-header {
+  padding-block: var(--s4);
+  align-items: center;
+}
+.site-header .home-link {
+  grid-column: 1 / span 6;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  justify-self: start;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.site-header .home-link:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.site-nav {
+  grid-column: 9 / span 4;
+  display: flex;
+  gap: var(--s4);
+}
+.site-nav a,
+.site-footer nav a { color: var(--ink); text-decoration: none; }
+.site-nav a:hover,
+.site-nav a[aria-current="page"],
+.site-footer nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* Home hero ------------------------------------------------- */
+.hero {
+  padding-block: var(--s12) var(--s16);
+  row-gap: var(--s4);
+  align-items: start;
+}
+.hero .glyph-slot { grid-column: 1 / span 3; }
+.hero .statement {
+  grid-column: 4 / span 8;
+  display: grid;
+  gap: var(--s3);
+  /* optically aligns the first line with the top row of the glyph */
+  margin-top: -6px;
+}
+.hero .statement .t-meta { max-width: var(--measure-ui); }
+
+/* Work list ------------------------------------------------- */
+.work { display: grid; gap: var(--s4); padding-bottom: var(--s16); }
+.work-list { list-style: none; padding: 0; border-bottom: var(--rule); }
+
+.work-item {
+  position: relative;
+  padding-block: var(--s4);
+  border-top: var(--rule);
+  row-gap: var(--s2);
+}
+.work-item .glyph-slot { grid-column: 1 / span 1; padding-top: var(--s1); }
+.work-item .summary {
+  grid-column: 2 / span 7;
+  display: grid;
+  gap: var(--s1);
+}
+.work-item .summary .t-body { color: var(--text-2); }
+.work-item .meta {
+  grid-column: 10 / span 3;
+  padding-top: var(--s1);
+}
+
+.work-item .title a {
+  color: var(--accent-text);
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--dur) var(--ease-out);
+}
+/* the whole row is the click target; the title carries the link */
+.work-item .title a::after { content: ""; position: absolute; inset: 0; }
+.work-item:hover .title a,
+.work-item .title a:focus-visible { text-decoration-color: currentColor; }
+.work-item .title a:focus-visible { outline: none; }
+.work-item:has(a:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* Footer ---------------------------------------------------- */
+.site-footer {
+  padding-block: var(--s4) var(--s8);
+  border-top: var(--rule);
+  align-items: baseline;
+}
+.site-footer { row-gap: var(--s3); }
+.site-footer > .t-meta { grid-column: 1 / span 4; }
+.site-footer .contact { grid-column: 5 / span 4; display: grid; gap: var(--s1); }
+.site-footer .contact ul { list-style: none; padding: 0; display: grid; gap: var(--s1); }
+.site-footer .contact a { overflow-wrap: anywhere; }
+.site-footer nav { grid-column: 9 / span 4; display: flex; gap: var(--s4); font-size: var(--fs-meta); }
+
+/* Tablet ---------------------------------------------------- */
+@media (max-width: 960px) {
+  .hero .glyph-slot { grid-column: 1 / -1; }
+  .hero .statement { grid-column: 1 / span 10; margin-top: 0; }
+  .work-item .glyph-slot { grid-column: 1 / span 2; }
+  .work-item .summary { grid-column: 3 / span 10; }
+  .work-item .meta { grid-column: 3 / span 10; padding-top: 0; }
+  .site-nav { grid-column: 7 / span 6; }
+  .site-footer > .t-meta { grid-column: 1 / span 6; }
+  .site-footer .contact { grid-column: 7 / span 6; }
+  .site-footer nav { grid-column: 7 / span 6; }
+}
+
+/* Phone ----------------------------------------------------- */
+@media (max-width: 640px) {
+  .site-header { padding-block: var(--s3); }
+  .hero { padding-block: var(--s8) var(--s12); }
+  .hero .statement { grid-column: 1 / -1; }
+  .work-item .glyph-slot { grid-column: 1 / -1; padding-top: 0; }
+  .work-item .summary,
+  .work-item .meta { grid-column: 1 / -1; }
+  .site-header .home-link { grid-column: 1 / span 7; }
+  .site-nav { grid-column: 8 / span 5; gap: var(--s2); }
+  .site-footer > .t-meta,
+  .site-footer .contact,
+  .site-footer nav { grid-column: 1 / -1; }
+}

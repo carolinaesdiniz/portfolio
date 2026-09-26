@@ -1,0 +1,85 @@
+/* ==========================================================
+   Ponto — design tokens
+   Source of truth: identidade-portfolio.md
+   ========================================================== */
+
+:root,
+[data-theme="light"] {
+  /* Color — light */
+  --paper:       #F1F2EF;  /* background */
+  --surface:     #FFFFFF;
+  --ink:         #1A2422;  /* main text, ink glyph cells */
+  --text-2:      #5C6663;  /* secondary text */
+  --hairline:    #D8DAD4;
+  --accent:      #C2156B;  /* anilina, graphic: glyph cells, focus ring */
+  --accent-text: #A3105A;  /* anilina, text: links */
+  color-scheme: light;
+
+  /* Type families */
+  --font-voice: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-ui:    "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale (base 16px) */
+  --fs-hero: 44px;    --lh-hero: 1.15;     /* serif, 30px on mobile */
+  --fs-case: 34px;    --lh-case: 1.2;      /* serif */
+  --fs-section: 27px; --lh-section: 1.3;   /* serif */
+  --fs-sub: 21px;     --lh-sub: 1.4;       /* sans, weight 500 */
+  --fs-body: 17px;    --lh-body: 1.65;     /* sans */
+  --fs-long: 19px;    --lh-long: 1.75;     /* serif, long-form body */
+  --fs-meta: 13px;    --lh-meta: 1.5;      /* sans */
+
+  /* Line length */
+  --measure-ui: 72ch;
+  --measure-voice: 78ch;
+
+  /* Spacing — every step is a multiple of 8 */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s6: 48px;
+  --s8: 64px;
+  --s12: 96px;
+  --s16: 128px;
+
+  /* Layout */
+  --max: 1120px;
+  --gutter: 24px;
+  --columns: 12;
+  --radius: 2px;      /* surfaces only; glyph cells are always 0 */
+  --rule: 1px solid var(--hairline);
+
+  /* Motion */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --glyph-step: 40ms; /* delay between cells when the case glyph draws */
+}
+
+@media (max-width: 640px) {
+  :root { --fs-hero: 30px; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:       #131A19;
+    --surface:     #1A2221;
+    --ink:         #ECEEE9;
+    --text-2:      #9AA39F;
+    --hairline:    #2C3533;
+    --accent:      #FF71A8;
+    --accent-text: #FF71A8;
+    color-scheme: dark;
+  }
+}
+
+[data-theme="dark"] {
+  --paper:       #131A19;
+  --surface:     #1A2221;
+  --ink:         #ECEEE9;
+  --text-2:      #9AA39F;
+  --hairline:    #2C3533;
+  --accent:      #FF71A8;
+  --accent-text: #FF71A8;
+  color-scheme: dark;
+}

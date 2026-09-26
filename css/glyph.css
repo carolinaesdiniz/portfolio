@@ -1,0 +1,37 @@
+/* ==========================================================
+   Ponto — glyph component
+   Cells are square (radius 0), crisp, never rotated or mirrored.
+   ========================================================== */
+
+.glyph {
+  display: block;
+  flex: none;
+  shape-rendering: crispEdges;
+  overflow: visible;
+}
+
+.glyph .c-accent { fill: var(--accent); }
+.glyph .c-ink    { fill: var(--ink); }
+.glyph .c-empty  { fill: none; stroke: var(--hairline); stroke-width: 1; }
+
+/* Approved resolution: at the smallest size the hairline disappears,
+   so empty cells use the secondary text colour there. */
+.glyph--xs .c-empty { stroke: var(--text-2); }
+
+/* The one orchestrated moment: the case-page glyph draws itself
+   cell by cell, row by row, 40ms apart, once. */
+.glyph--draw rect {
+  animation: glyph-cell var(--dur-fast) var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--glyph-step));
+}
+@keyframes glyph-cell {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glyph--draw rect { animation: none; }
+}
+
+/* 404 only: every cell is empty, so the outline uses the secondary
+   text colour to stay visible (the hairline alone is 1.25:1). */
+.glyph-empty .c-empty { stroke: var(--text-2); }
