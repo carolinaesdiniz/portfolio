@@ -31,7 +31,7 @@ PONTO.maxAccent = 8;
 
 PONTO.glyphs = {
   "carol": {
-    name: "Carol Diniz",
+    name: "Carolina Diniz",
     personal: true,
     rows: [2, 4, 4, 3]
   },

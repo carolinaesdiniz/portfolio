@@ -48,7 +48,7 @@
 .role-row .level { color: var(--text-2); font-size: var(--fs-meta); line-height: var(--lh-meta); }
 .role-row .did { margin: 0; color: var(--text-2); }
 
-/* Legend: lives on the first case only --------------------- */
+/* Legend: on every case and on About ----------------------- */
 .legend { padding-block: var(--s4) var(--s6); }
 .legend .case-wide {
   display: grid;

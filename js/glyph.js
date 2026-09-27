@@ -36,7 +36,7 @@
   function describe(id) {
     var g = P.glyphs[id];
     if (g.empty) return "Empty glyph: no project and no work at this address.";
-    var lead = g.personal ? "How Carol works. " : g.name + ", Carol's role. ";
+    var lead = g.personal ? "How Carolina Diniz works. " : g.name + ", Carolina Diniz’s role. ";
     return lead + g.rows.map(function (lv, i) {
       return P.phases[i] + ": " + P.levels[lv] + ", " + lv + " of 4";
     }).join(". ") + ".";
