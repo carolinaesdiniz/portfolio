@@ -48,28 +48,8 @@
 .role-row .level { color: var(--text-2); font-size: var(--fs-meta); line-height: var(--lh-meta); }
 .role-row .did { margin: 0; color: var(--text-2); }
 
-/* Legend: on every case and on About ----------------------- */
-.legend { padding-block: var(--s4) var(--s6); }
-.legend .case-wide {
-  display: grid;
-  gap: var(--s2);
-  padding-block: var(--s3);
-  border-block: var(--rule);
-}
-.legend-keys {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s1) var(--s4);
-  font-size: var(--fs-meta);
-  line-height: var(--lh-meta);
-}
-.legend-keys li { display: inline-flex; align-items: center; gap: var(--s1); }
-.legend-keys svg { flex: none; shape-rendering: crispEdges; }
-.legend-keys .k-accent { fill: var(--accent); }
-.legend-keys .k-ink { fill: var(--ink); }
-.legend-keys .k-empty { fill: none; stroke: var(--text-2); stroke-width: 1; }
+/* Legend: only the keys on cases and About; the full explanation is on the home page */
+.legend { padding-block: 0 var(--s6); }
 
 /* Results --------------------------------------------------- */
 .results {

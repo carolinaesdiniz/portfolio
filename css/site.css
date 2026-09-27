@@ -124,6 +124,25 @@
 }
 .hero .statement .t-meta { max-width: var(--measure-ui); }
 
+/* Glyph legend -------------------------------------------
+   Keys are shared with the case pages; the explanation lives here only. */
+.home-legend { display: grid; gap: var(--s2); padding-bottom: var(--s12); }
+.home-legend .t-body { max-width: var(--measure-ui); }
+.legend-keys {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s4);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+.legend-keys li { display: inline-flex; align-items: center; gap: var(--s1); }
+.legend-keys svg { flex: none; shape-rendering: crispEdges; }
+.legend-keys .k-accent { fill: var(--accent); }
+.legend-keys .k-ink { fill: var(--ink); }
+.legend-keys .k-empty { fill: none; stroke: var(--text-2); stroke-width: 1; }
+
 /* Work list ------------------------------------------------- */
 .work { display: grid; gap: var(--s4); padding-bottom: var(--s16); }
 .work-list { list-style: none; padding: 0; border-bottom: var(--rule); }
