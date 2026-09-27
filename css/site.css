@@ -18,26 +18,41 @@
   font-weight: 500;
 }
 .site-header .home-link:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-/* Right side of the header: the nav starts on column 10, the same
-   column as the metadata in the work lists; the theme button closes
-   the group on the right edge of the grid. */
-.header-end {
-  grid-column: 10 / span 3;
-  display: flex;
+/* Right side of the header and footer ------------------------
+   Every item starts on a column line. Desktop: Work on column 10
+   (the same column as the metadata in the work lists), About on 11,
+   the theme switch (or the contact icons) on 12. Tablet: the same
+   three items on columns 7, 9 and 11. Phone: they drop to their own
+   row, left aligned. Subgrid keeps the items on the page grid. */
+.header-end,
+.site-footer .footer-end {
+  grid-column: 10 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
   align-items: center;
-  gap: var(--s4);
 }
-.site-nav {
-  display: flex;
-  gap: var(--s4);
-  margin-inline-end: auto;
+.site-nav,
+.site-footer nav {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
 }
+.site-nav > a,
+.site-footer nav > a { grid-column: span 1; justify-self: start; }
+.header-end > .theme-toggle,
+.site-footer .contact { grid-column: 3 / span 1; justify-self: start; }
+
 .site-nav a,
 .site-footer nav a { color: var(--ink); text-decoration: none; }
+.site-footer nav { font-size: var(--fs-meta); }
+.site-nav a:hover,
+.site-nav a[aria-current="page"],
+.site-footer nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
-/* Icon buttons: theme switch, contact. Quiet until pointed at.
-   32px target, 20px icon; the negative end margin puts the icon,
-   not the box, on the grid edge. */
+/* Icon buttons (contact). Quiet until pointed at.
+   32px target, 20px icon; the negative start margin puts the icon,
+   not the box, on the column line. */
 .icon-btn {
   display: inline-grid;
   place-items: center;
@@ -53,23 +68,45 @@
   transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
 .icon-btn:hover { border-color: var(--hairline); text-decoration: none; }
-.icon-btn svg {
-  width: 20px; height: 20px; display: block;
+.icon-btn svg,
+.theme-toggle svg {
+  display: block;
   fill: none; stroke: currentColor; stroke-width: 1.5;
   stroke-linecap: square; stroke-linejoin: miter;
 }
-.header-end > .icon-btn:last-child,
-.site-footer .contact li:last-child .icon-btn { margin-inline-end: -6px; }
+.icon-btn svg { width: 20px; height: 20px; }
+.site-footer .contact { list-style: none; padding: 0; margin: 0 0 0 -6px; display: flex; gap: 0; }
+.site-footer .contact .icon-btn { color: var(--text-2); }
+.site-footer .contact .icon-btn:hover { color: var(--ink); }
 
-/* Theme switch: needs JavaScript, so it only shows when it works */
-.theme-toggle { display: none; }
-.has-js .theme-toggle { display: inline-grid; }
+/* Theme switch: a text button that reads like the nav next to it.
+   Icon + the name of the theme it switches to ("Dark" / "Light").
+   Needs JavaScript, so it only shows when it works. */
+.theme-toggle,
+.theme-toggle.icon-btn {
+  display: none;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  gap: var(--s1);
+  align-items: center;
+  font: inherit;
+  line-height: inherit;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  white-space: nowrap;
+}
+.has-js .theme-toggle { display: inline-flex; }
+.theme-toggle svg { width: 16px; height: 16px; flex: none; }
+.theme-toggle:hover { border: 0; }
+.theme-toggle:hover .theme-label {
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
 .theme-toggle .i-sun { display: none; }
 [data-theme="dark"] .theme-toggle .i-sun { display: block; }
 [data-theme="dark"] .theme-toggle .i-moon { display: none; }
-.site-nav a:hover,
-.site-nav a[aria-current="page"],
-.site-footer nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* Home hero ------------------------------------------------- */
 .hero {
@@ -136,17 +173,6 @@
   row-gap: var(--s3);
 }
 .site-footer > .t-meta { grid-column: 1 / span 9; }
-/* Same column as the header nav; contact closes the row on the grid edge */
-.site-footer .footer-end {
-  grid-column: 10 / span 3;
-  display: flex;
-  align-items: center;
-  gap: var(--s4);
-}
-.site-footer nav { display: flex; gap: var(--s4); font-size: var(--fs-meta); margin-inline-end: auto; }
-.site-footer .contact { list-style: none; padding: 0; margin: 0; display: flex; gap: 0; }
-.site-footer .contact .icon-btn { color: var(--text-2); }
-.site-footer .contact .icon-btn:hover { color: var(--ink); }
 
 /* Tablet ---------------------------------------------------- */
 @media (max-width: 960px) {
@@ -155,11 +181,15 @@
   .work-item .glyph-slot { grid-column: 1 / span 2; }
   .work-item .summary { grid-column: 3 / span 10; }
   .work-item .meta { grid-column: 3 / span 10; padding-top: 0; }
-  /* no column 10 to meet here: the group sits on the right edge of the grid */
+  /* no column 10 to meet here: Work, About and the switch start on 7, 9, 11 */
   .header-end,
-  .site-footer .footer-end { grid-column: 7 / span 6; justify-content: flex-end; }
+  .site-footer .footer-end { grid-column: 7 / -1; }
   .site-nav,
-  .site-footer nav { margin-inline-end: 0; }
+  .site-footer nav { grid-column: 1 / span 4; }
+  .site-nav > a,
+  .site-footer nav > a { grid-column: span 2; }
+  .header-end > .theme-toggle,
+  .site-footer .contact { grid-column: 5 / span 2; }
   .site-footer > .t-meta { grid-column: 1 / span 6; }
 }
 
@@ -171,9 +201,12 @@
   .work-item .glyph-slot { grid-column: 1 / -1; padding-top: 0; }
   .work-item .summary,
   .work-item .meta { grid-column: 1 / -1; }
-  .site-header .home-link { grid-column: 1 / span 7; }
-  .header-end { grid-column: 8 / span 5; gap: var(--s2); }
-  .site-nav { gap: var(--s2); }
+  /* columns are too narrow to hold a word: the nav takes its own row */
+  .site-header { row-gap: var(--s2); }
+  .site-header .home-link { grid-column: 1 / -1; }
+  .header-end,
+  .site-footer .footer-end { grid-column: 1 / -1; display: flex; gap: var(--s3); }
+  .site-nav,
+  .site-footer nav { display: flex; gap: var(--s3); }
   .site-footer > .t-meta { grid-column: 1 / -1; }
-  .site-footer .footer-end { grid-column: 1 / -1; justify-content: space-between; }
 }

@@ -39,11 +39,21 @@
     });
   }
 
+  /* The switch shows an icon and the name of the theme it switches to.
+     The label is written here, so pages whose markup has no label
+     (the encrypted case) get it too. */
   function syncButtons(theme) {
     var next = theme === "dark" ? "light" : "dark";
     document.querySelectorAll(".theme-toggle").forEach(function (b) {
+      var label = b.querySelector(".theme-label");
+      if (!label) {
+        label = document.createElement("span");
+        label.className = "theme-label";
+        b.appendChild(label);
+      }
+      label.textContent = next === "dark" ? "Dark" : "Light";
       b.setAttribute("aria-label", "Switch to " + next + " theme");
-      b.setAttribute("title", "Switch to " + next + " theme");
+      b.removeAttribute("title");
     });
   }
 
